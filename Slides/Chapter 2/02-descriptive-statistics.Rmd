@@ -1,0 +1,21 @@
+---
+title: "Descriptive Statistics and Graphics"
+author: "Brandon M. Greenwell"
+output:
+  ioslides_presentation:
+    widescreen: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Visualizing univariate data
+
+## Visualizing bivariate data
+
+## Visualizing multivariate data
+
+## Measures of location
+
+## Measures of spread
