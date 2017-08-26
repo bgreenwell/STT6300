@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "stt6300chap1\n========================================================\nauthor: \ndate: \nautosize: true\n\nFirst Slide\n========================================================\n\nFor more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.\n\n- Bullet 1\n- Bullet 2\n- Bullet 3\n\nSlide With Code\n========================================================\n\n```{r}\nsummary(cars)\n```\n\nSlide With Plot\n========================================================\n\n```{r, echo=FALSE}\nplot(cars)\n```\n",
+    "created" : 1503511136196.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3234051222",
+    "id" : "468CAD03",
+    "lastKnownWriteTime" : 1503511136,
+    "last_content_update" : 1503511136,
+    "path" : "C:/Users/greenweb/Desktop/STT 6300/Slides/stt6300chap1.Rpres",
+    "project_path" : "stt6300chap1.Rpres",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_presentation"
+}

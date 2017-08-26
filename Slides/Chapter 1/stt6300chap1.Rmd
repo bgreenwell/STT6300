@@ -1,0 +1,98 @@
+---
+title: "STT6300: Introduction"
+author: "Brandon M. Greenwell"
+date: "August 23, 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## About me
+
+* B.S., M.S., and Ph.D. in Applied Statistics
+* Worked in the WSU SCC for a tear
+* Spent the last two as the lead Data Scientist over at the School of Aerospace Medicine
+* Currently work in the Data Science Lab at AFIT
+
+
+# What is statistics?
+
+
+## Statistics
+
+* The science of data collection and analysis!
+* The sexier term is now *Data Science*
+
+<center>![](kermit-statistics.gif)</center>
+
+
+## Design
+
+Before analyzing the data, the data needs to be collected. Thus, statistics also encompasses the science of collecting data.
+
+* **Sampling design** is the branch of statistics that focuses on collecting observational data
+* **Experimental design** is the branch of statistics that focuses on collecting data through experiments, like in a laboratory
+
+
+
+## Biostatistics
+
+* Statistics applied to biological experiments, especially in medicine, pharmacy, agriculture and fishery
+* Has seen enormous growth in recent years
+* Use in high-throughput data
+* New biomedical technologies like **microarrays**, next generation **sequencers** (genomics) and **mass spectrometry** (proteomics) generate massive amounts of data
+* Surge in new statistical methodology to dea with these "massive" data sets
+* Thousands of statsitical tests performed (false discvery rates)
+
+
+## How many observations should one collect?
+
+* Statistical power
+* Effect size
+* etc.
+
+
+## Statistical software
+
+* [R](https://www.r-project.org/)
+* [RStudio](https://www.rstudio.com/)
+
+
+## Populations and samples
+
+## Statistical models
+
+The scientific question that one hopes to investigate using statistical analysis can usually be formalized using statistical models. We shall use the following example to illustrate a simple models.
+
+```{r}
+data(Animals, package = "MASS")  # brain and body weights for 28 species of land
+head(Animals)                    # animals
+```
+
+
+## Statistical models
+
+```{r}
+par(mfrow = c(1, 2))  # setup to place the following plots side-by-side
+plot(Animals)  # plot the first column (x-axis) vs. the second column (y-axis)
+plot(Animals, log = "xy")  # transform both variables by taking the natural log
+```
+
+
+## Statistical models
+
+```{r}
+slr <- lm(log(brain) ~ log(body), data = Animals)
+plot(Animals, log = "xy")  # transform both variables by taking the natural log
+abline(slr, col = "red", lwd = 2)
+```
+
+
+## Statistic
+
+A statistic is a number that is computed from the data in a sample. That is, a statistic is
+computed by plugging numbers (i.e. the data) into a formula that does not require knowing the true
+parameter values of the population. One of the simplest examples of a statistic is to simply average the
+data values to compute the mean.
