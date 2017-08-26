@@ -1,8 +1,9 @@
 ---
 title: "STT6300: Introduction"
 author: "Brandon M. Greenwell"
-date: "August 23, 2017"
-output: ioslides_presentation
+output:
+  ioslides_presentation:
+    widescreen: true
 ---
 
 ```{r setup, include=FALSE}
@@ -43,15 +44,20 @@ Before analyzing the data, the data needs to be collected. Thus, statistics also
 * Has seen enormous growth in recent years
 * Use in high-throughput data
 * New biomedical technologies like **microarrays**, next generation **sequencers** (genomics) and **mass spectrometry** (proteomics) generate massive amounts of data
-* Surge in new statistical methodology to dea with these "massive" data sets
-* Thousands of statsitical tests performed (false discvery rates)
+* Surge in new statistical methodology to deal with these "massive" data sets
+* Thousands of statistical tests are often performed (false discovery rates)
 
 
 ## How many observations should one collect?
 
-* Statistical power
-* Effect size
-* etc.
+* Think of data as evidence
+* The more data we have, the more information we have
+* However, data collection can be expensive and time consuming (e.g., pharmaceutical studies)
+* Determining "optimal" sample size is important in any study, and quite simple once all of the following are specified:
+  - smallest effect of clinical significance
+  - desired **power** ($1 - \beta$) and **significance level** ($\alpha$)
+  - distributions of the observables
+  - whether a one- or two-sided test will be used
 
 
 ## Statistical software
@@ -61,6 +67,11 @@ Before analyzing the data, the data needs to be collected. Thus, statistics also
 
 
 ## Populations and samples
+
+* The primary goal of statistics is to infer something about a **population** based on a **sample** obtained from the population (typically at random)
+* Populations may be very large (or even hypothetically infinite in size)
+* Often impossible or impractical to observe every object in the population
+* With statistics we can make accurate statements about the population using a sample (even a very small one!)
 
 ## Statistical models
 
@@ -81,18 +92,26 @@ plot(Animals, log = "xy")  # transform both variables by taking the natural log
 ```
 
 
-## Statistical models
+## Statistical models {.smaller}
 
 ```{r}
-slr <- lm(log(brain) ~ log(body), data = Animals)
-plot(Animals, log = "xy")  # transform both variables by taking the natural log
-abline(slr, col = "red", lwd = 2)
+slr <- lm(log(brain) ~ log(body), data = Animals)  # fit a simple linear model
+summary(slr)  # print a summary of the fitte model
 ```
 
 
+## Statistical models {.smaller}
+
+```{r, fig.width=7, fig.height=5}
+plot(log(brain) ~ log(body), data = Animals)  # plot the data
+abline(slr, col = "red", lwd = 2)  # plot the fitted regression line
+```
+
 ## Statistic
 
-A statistic is a number that is computed from the data in a sample. That is, a statistic is
-computed by plugging numbers (i.e. the data) into a formula that does not require knowing the true
-parameter values of the population. One of the simplest examples of a statistic is to simply average the
-data values to compute the mean.
+* A statistic is a number that is computed from the data in a sample 
+* Computed by plugging numbers (i.e., the data) into a formula that does not require knowing the true
+parameter values of the population
+* One of the simplest examples of a statistic is the arithmetic mean: 
+$$\bar{x} = \frac{x_1 + \dots + x_n}{n}$$
+* Other examples include measures of location (e.g., the median), measures of central tendency (e.g., the variance, the MAD/MADN estimators, and the IQR), and various correlation measures
