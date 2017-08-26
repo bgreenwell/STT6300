@@ -48,18 +48,6 @@ Before analyzing the data, the data needs to be collected. Thus, statistics also
 * Thousands of statistical tests are often performed (false discovery rates)
 
 
-## How many observations should one collect?
-
-* Think of data as evidence
-* The more data we have, the more information we have
-* However, data collection can be expensive and time consuming (e.g., pharmaceutical studies)
-* Determining "optimal" sample size is important in any study, and quite simple once all of the following are specified:
-  - smallest effect of clinical significance
-  - desired **power** ($1 - \beta$) and **significance level** ($\alpha$)
-  - distributions of the observables
-  - whether a one- or two-sided test will be used
-
-
 ## Statistical software
 
 * [R](https://www.r-project.org/)
@@ -73,6 +61,19 @@ Before analyzing the data, the data needs to be collected. Thus, statistics also
 * Often impossible or impractical to observe every object in the population
 * With statistics we can make accurate statements about the population using a sample (even a very small one!)
 
+
+## How many observations should one collect?
+
+* Think of data as evidence
+* The more data we have, the more information we have
+* However, data collection can be expensive and time consuming (e.g., pharmaceutical studies)
+* Determining "optimal" sample size is important in any study, and quite simple once all of the following are specified:
+    - smallest effect of **clinical significance**
+    - desired **power** ($1 - \beta$) and **significance level** ($\alpha$)
+    - distributions of the observables
+    - whether a one- or two-sided test will be used
+    
+
 ## Statistical models
 
 The scientific question that one hopes to investigate using statistical analysis can usually be formalized using statistical models. We shall use the following example to illustrate a simple models.
@@ -85,7 +86,7 @@ head(Animals)                    # animals
 
 ## Statistical models
 
-```{r}
+```{r, fig.width=8, fig.height=4}
 par(mfrow = c(1, 2))  # setup to place the following plots side-by-side
 plot(Animals)  # plot the first column (x-axis) vs. the second column (y-axis)
 plot(Animals, log = "xy")  # transform both variables by taking the natural log
@@ -102,16 +103,26 @@ summary(slr)  # print a summary of the fitte model
 
 ## Statistical models {.smaller}
 
-```{r, fig.width=7, fig.height=5}
+```{r, fig.width=4, fig.height=4}
 plot(log(brain) ~ log(body), data = Animals)  # plot the data
 abline(slr, col = "red", lwd = 2)  # plot the fitted regression line
 ```
 
+
+## Statistical models
+
+A simple formula to predict brain weight (g) from body weight (kg) using the previously fitted regression model is
+
+$$
+\hat{\log\left(brain\right)} = 2.555 + 0.496 \log\left(body\right)
+$$
+
+
 ## Statistic
 
-* A statistic is a number that is computed from the data in a sample 
-* Computed by plugging numbers (i.e., the data) into a formula that does not require knowing the true
-parameter values of the population
+* A statistic is a number that is computed from the data in a (random) sample 
+* They can be computed by plugging the data into a formula that does not require knowing the true
+parameter values of the population of interest
 * One of the simplest examples of a statistic is the arithmetic mean: 
 $$\bar{x} = \frac{x_1 + \dots + x_n}{n}$$
-* Other examples include measures of location (e.g., the median), measures of central tendency (e.g., the variance, the MAD/MADN estimators, and the IQR), and various correlation measures
+* Other examples include the median, variance, MAD, IQR, and the estimated intercept/slope of a regression line
