@@ -1,5 +1,5 @@
 ---
-title: "Descriptive Statistics and Graphics"
+title: "Descriptive Graphics in R"
 author: "Brandon M. Greenwell"
 output:
   ioslides_presentation:
@@ -8,14 +8,41 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+# Load required data
+eggshell <- read.csv("C:\\Users\\greenweb\\Desktop\\Filing cabinet\\STT 6300\\Data sets\\eggshell.csv",
+                     header = TRUE)
 ```
 
-## Visualizing univariate data
+## Always plot your data!!
 
-## Visualizing bivariate data
+* Descriptive statistics are usefull, but should always be complimented with appropriate graphics
+* We want to see what the distribution of the sample looks like
+* The "shape" of the distribution can often tell us a lot about the population of interest
+* A few common graphics we will covere here:
+    - boxplot
+    - histogram
+    - smoothed histogram/nonparametric density
+    
 
-## Visualizing multivariate data
+## Boxplots
 
-## Measures of location
+* A boxplot is obtained by simply drawing a box!
+* The top/bottom of the box correspond to the upper/lower quartiles
+* A line is then drawn through the median
+* Sometimes, the sample mean is also displayed (depends on the software)
+* Vertical lines are then drawn from the top and bottom of the box (these are called whiskers)
+* These vertical lines extend to the most extreme values in the sample within the range
+$$
+Q_1 - 1.5 \times IQR \quad \textrm{and} \quad Q_3 + 1.5 \times IQR
+$$
+* Observations outside this range are denoted by individual points and are considered as potential outliers!
 
-## Measures of spread
+
+## Boxplots
+
+```{r}
+par(mfrow = c(1, 2))
+boxplot(eggshell$thickness, ylab = "Thickness (mm)", col = "red")
+boxplot(eggshell$pcb, ylab = "PCB concentration (ppb)", col = "blue")
+```
