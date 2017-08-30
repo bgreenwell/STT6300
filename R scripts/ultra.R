@@ -1,6 +1,3 @@
-# Load required packages
-library(lattice)
-
 # Load the data set
 ultra <- read.csv(file = file.choose(), header = TRUE)
 
@@ -27,7 +24,36 @@ sapply(ultra, FUN = var)
 males <- ultra[ultra$gender == "male", ]
 females <- ultra[ultra$gender == "female", ]
 
-mean.time.male
+# Compute the mean time for males
+cat("The average time for males was", mean(males$time), "minutes \n")
 
-# Histogram of time, stratified by gender
-histogram(~ time | gender, data = ultra)
+# Compute the standard deviation of male times
+cat("The standard deviation for male times was", sd(males$time), "minutes \n")
+
+# Compute the mean time for females
+cat("The average time for females was", mean(females$time), "minutes \n")
+
+# Compute the standard deviation of female times
+cat("The standard deviation for female times was", sd(females$time), "minutes \n")
+
+# Histograms of running times for males and females
+par(mfrow = c(1, 2))
+hist(males$time, main = "Males", xlab = "Running time")
+hist(females$time, main = "Females", xlab = "Running time")
+
+# Boxplots of running times for males and females
+boxplot(time ~ gender, data = ultra, notch = TRUE)
+
+# Notice the notches in the boxplot that are included since I specified
+# notch = TRUE. Read the help file for this function and read about how these
+# notches can be useful for comparing groups
+?boxplot
+
+#
+# Alternative approach using the lattice package that comes with R
+#
+
+# Histogram and boxplot of time, stratified by gender
+library(lattice)
+histogram(~ time | gender, data = ultra, xlab = "Running time")
+bwplot(~ time | gender, data = ultra)

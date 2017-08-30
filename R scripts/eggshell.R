@@ -75,3 +75,10 @@ IQR(thickness)
 mad(thickness)  # this is what we defined as the MADN statistic
 mad(thickness, constant = 1)
 median(abs(thickness - median(thickness)))
+
+# Quantiles
+x <- quantile(thickness, probs = c(0.25, 0.5, 0.75))
+x
+boxplot(thickness)
+abline(h = x, lty = 2, col = "red")
+abline(h = range(thickness), lty = 2, col = "red")
