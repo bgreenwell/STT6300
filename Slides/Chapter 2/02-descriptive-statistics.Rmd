@@ -16,10 +16,10 @@ eggshell <- read.csv("C:\\Users\\greenweb\\Desktop\\Filing cabinet\\STT 6300\\Da
 
 ## Always plot your data!!
 
-* Descriptive statistics are usefull, but should always be complimented with appropriate graphics
+* Descriptive statistics are useful, but should always be complimented with appropriate graphics
 * We want to see what the distribution of the sample looks like
 * The "shape" of the distribution can often tell us a lot about the population of interest
-* A few common graphics we will covere here:
+* A few common graphics we will cover here:
     - boxplot
     - histogram
     - smoothed histogram/nonparametric density
@@ -41,8 +41,94 @@ $$
 
 ## Boxplots
 
-```{r}
+```{r, eval=FALSE}
+# Set up plotting region
 par(mfrow = c(1, 2))
+
+# Boxplot for thickness
 boxplot(eggshell$thickness, ylab = "Thickness (mm)", col = "red")
+
+# Boxplot for PCB concentration
 boxplot(eggshell$pcb, ylab = "PCB concentration (ppb)", col = "blue")
+```
+
+## Boxplots
+
+```{r, echo=FALSE}
+# Set up plotting region
+par(mfrow = c(1, 2))
+
+# Boxplot for thickness
+boxplot(eggshell$thickness, ylab = "Thickness (mm)", col = "red")
+
+# Boxplot for PCB concentration
+boxplot(eggshell$pcb, ylab = "PCB concentration (ppb)", col = "blue")
+```
+
+
+## Histograms
+
+* Another useful graphic for displaying the shape of a distribution is the histogram
+* The idea is to divide the observations into bins of equal width
+* We then draw rectangles for each bin starting at zero and with a height that corresponds to either the frequency (i.e., the number of observations) in the bin or the relative frequency (i.e., the percentage of observations)
+
+
+## Histograms
+
+```{r, eval=FALSE}
+# Set up plotting region
+par(mfrow = c(1, 3))
+
+# Default histogram for thickness
+hist(eggshell$thickness, main = "", xlab = "Thickness (mm)")
+
+# Too many bins
+hist(eggshell$thickness, breaks = 25, freq = FALSE, main = "",
+     xlab = "Thickness (mm)")
+
+# Too few bins
+hist(eggshell$thickness, breaks = 2, freq = FALSE, main = "",
+     xlab = "Thickness (mm)")
+```
+
+
+## Histograms
+
+```{r, echo=FALSE}
+# Set up plotting region
+par(mfrow = c(1, 3))
+
+# Default histogram for thickness
+hist(eggshell$thickness, main = "", xlab = "Thickness (mm)")
+
+# Too many bins
+hist(eggshell$thickness, breaks = 25, freq = FALSE, main = "",
+     xlab = "Thickness (mm)")
+
+# Too few bins
+hist(eggshell$thickness, breaks = 2, freq = FALSE, main = "",
+     xlab = "Thickness (mm)")
+```
+
+
+## Distributional shapes
+
+* Determining the number, or equivalently, the width of the bins can be difficult
+* If there are too many bins, there will not be enough (if any) in each group
+* If there are too few bins, then it will be difficult to capture the shape of the distribution
+* If we had an infinite amount of data we could make the histogram as fine as possible by increasing the number of bins
+* In this limiting case, the histogram will look like a smooth curve, which we call a density curve
+
+
+## Distributional shapes
+
+```{r, echo=FALSE, fig.wdith=5, fig.height=5}
+set.seed(101)
+x <- seq(from = 0, to = 4, length = 500)
+par(mfrow = c(2, 2))
+plot(dnorm, xlim = c(-4, 4), xlab = "", ylab = "Density")
+plot(dlnorm, xlim = c(0, 4), xlab = "", ylab = "Density")
+plot(x, rev(dlnorm(x)), type = "l", xlab = "", ylab = "Density")
+plot(density(c(rnorm(5000), rnorm(5000, mean = 4, sd = 1.5))), 
+     main = "", xlab = "", ylab = "Density")
 ```
