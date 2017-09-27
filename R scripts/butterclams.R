@@ -23,3 +23,6 @@ boxplot(butterclams$ratio, ylab = "Ratio")
 out <- boxplot(butterclams$ratio, plot = FALSE)
 out$out
 which(butterclams$ratio == out$out)  # the sixth observation may be an outlier
+
+x <- butterclams$ratio[6L]
+(x - mean(butterclams$ratio)) / sd(butterclams$ratio)
