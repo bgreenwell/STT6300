@@ -98,6 +98,33 @@
   In other words, 77 eggs is about three standard deviations below the mean. So, $P\left(X \le 77\right) \approx$ the probability of being three or more standard deviations below the mean $\approx 0.003 / 2 = 0.0015$.
 
   \end{enumerate}
+
+  \item 
+  
+  \begin{enumerate}
+  
+    \item $\binom{20}{5} = \frac{20!}{5!(20 - 5)!} = \frac{(20)(19)(18)(17)(16)(15!)}{5!(15!)} = 15504$.
+    
+    \item $P\left(X = 0\right) = \binom{5}{0}\left(7/20\right)^0(1 - 7/20)^5 = 0.116$.
+  
+  \end{enumerate}
+  
+  \item Let $X$ be a random variable that represents the number of white croaker fish with high mercury levels out of $n = 100$. It follows that $X \sim Binomial\left(n = 100, p = 0.4\right)$.
+  
+  \begin{enumerate}
+  
+    \item $P\left(X = 100\right) = (0.4)^100 \approx 1.6069 \times 10^{-40}$.
+    
+    \item $P\left(X = 45\right) = \binom{100}{45}(0.4)^{45}(1 - 0.4)^{55} = 0.0478$.
+    
+    \item $E\left[X\right] = np = (100)(0.4) = 40$ fish and $\sqrt{Var\left[X\right]} = \sqrt{np(1-p)} = \sqrt{(100)(0.4)(0.6)} = 4.898979$ fish.
+    
+    \item $P\left(X \ge 55\right) = 1 - P\left(X \le 54\right) = 1 - \left[P\left(X = 0\right) + P\left(X = 1\right) + \dots P\left(X = 54\right)\right]$. In R, we get
+    <<>>=
+    1 - pbinom(54, size = 100, prob  = 0.4)
+    @
+  
+  \end{enumerate}
   
 \end{enumerate}
 
