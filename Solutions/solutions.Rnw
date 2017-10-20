@@ -219,5 +219,97 @@
 \end{enumerate}
 
 
+\section{Chapter 5}
+
+\begin{enumerate}
+
+  \item Using the central limit theorem, $\bar{X} \sim N\left(\mu = 19, \sigma = 7.8 / \sqrt{30}\right)$. So, 
+      \begin{align*}
+        P\left(\bar{X} > 21.3\right) &= 1 - P\left(\bar{X} \le 21.3\right) \\
+          &= 1 - P\left(\frac{\bar{X} - 19}{7.8 / \sqrt{30}} < \frac{21.3 - 19}{7.8 / \sqrt{30}}\right) \\
+          &= 1 - P\left(Z < \frac{21.3 - 19}{7.8 / \sqrt{30}}\right) \\
+          &= 1 - P\left(Z < 1.615079\right) \\
+          &= 1 - \Phi\left(1.615079\right)
+      \end{align*}
+      In R, we get
+      <<>>=
+      1 - pnorm(1.615079)
+      @
+      
+  \item \begin{enumerate}
+          \item Running the R script \texttt{\textbf{maleturtle.R}}, a 99\% confidence interval for the mean carapace length is $\left(106.6246, 120.1254\right)$.
+          \item Running the R script \texttt{\textbf{maleturtle.R}}, a 99\% confidence interval for the mean carapace width is $\left(84.23794, 92.34539\right)$.
+          \item Based on the plot, it seems reasonable that this sample belongs to the Painted Turtle species (the true mean happens to be captured in the 99\% confidence intervals).
+          \item Narrower, since we are decreaing our confidence.
+          \item The normal approximation does not seem unreasonable here, but more data is needed to get a clearer picture. In R, try
+          <<fig.width=8, fig.height=4>>=
+          # Carapace length
+length <- c(93, 94, 96, 101, 102, 103, 104, 106, 107, 
+  112, 113, 114, 116, 117, 117, 119, 120, 120, 121, 125, 
+  127, 128, 131, 135)
+
+# Carapce width
+width <- c(74, 78, 80, 84, 85, 81, 83, 83, 82, 89, 88, 
+  86, 90, 90, 91, 93, 89, 93, 95, 93, 96, 95, 95, 106)
+
+# Histograms
+par(mfrow = c(1, 2))
+hist(length, br = 5)
+hist(width, br = 5)
+          @
+        \end{enumerate}
+        
+  \item In R, you could use
+<<>>=
+# Path to data set on my laptop
+path <- "C:\\Users\\greenweb\\Desktop\\Filing cabinet\\STT 6300\\Data sets\\bodytemp.csv"
+
+# If you don't know how to find this, then just use: path <- file.choose()
+
+# Load the data
+bodytemp <- read.csv(path, header = TRUE)
+
+# Temperature variable
+temp <- bodytemp$temp
+
+# Pulse rate
+pulse <- bodytemp$pulse
+
+# Part a)
+t.test(temp, conf.level = 0.95)$conf.int
+
+# Part b)
+t.test(temp, conf.level = 0.99)$conf.int
+
+# Part c)
+#
+# The 99% confidence interval for mean temperature is wider 
+# than the corresponding 95% confidence interval.
+
+# Part d)
+#
+# No, since 98.6 is outside the range of both confidence 
+# intervals.
+
+# Part e)
+t.test(pulse, conf.level = 0.90)$conf.int
+
+# Part f)
+#
+# False! Go back and read how we interpret confidence 
+# intervals!
+
+@
+  
+  \item The correct answer is c). Take a hard look at b) and try to determine why it is not the correct answer.
+  
+  \item Skip. Extra credit. 
+  
+  \item The correct answer is c). For a given sample, the more confident you want to be, the wider your interval will be and vice versa.
+  
+  \item The correct answer is f).
+
+\end{enumerate}
+
 
 \end{document}
