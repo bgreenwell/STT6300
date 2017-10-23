@@ -15,14 +15,28 @@ hist(discharge)
 boxplot(intake, discharge, names = c("Intake", "Discharge"))
 boxplot(intake, discharge, names = c("Intake", "Discharge"), notch = TRUE)
 
+# Check equal variance assumption
+sd.intake <- sd(intake)
+sd.discharge <- sd(discharge)
+sd.discharge / sd.intake  # seems plausible
+
 # Two-sample t-test assuming equal variances
-t.test(intake, discharge, alternative = "two.sided", 
+t.test(intake, discharge, 
+       alternative = "two.sided", 
        mu = 0,
        var.equal = TRUE,
        conf.level = 0.95)
 
 # Two-sample t-test assuming unequal variances
-t.test(intake, discharge, alternative = "two.sided", 
+t.test(intake, discharge, 
+       alternative = "two.sided", 
+       mu = 0,
+       var.equal = FALSE,
+       conf.level = 0.95)
+
+# Test of our original (one-sided) hypothesis
+t.test(intake, discharge, 
+       alternative = "greater",  # H1: intake > discharge
        mu = 0,
        var.equal = FALSE,
        conf.level = 0.95)
