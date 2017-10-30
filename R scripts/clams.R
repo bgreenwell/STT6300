@@ -16,9 +16,19 @@ boxplot(intake, discharge, names = c("Intake", "Discharge"))
 boxplot(intake, discharge, names = c("Intake", "Discharge"), notch = TRUE)
 
 # Check equal variance assumption
-sd.intake <- sd(intake)
-sd.discharge <- sd(discharge)
-sd.discharge / sd.intake  # seems plausible
+sd1 <- sd(intake)
+sd2 <- sd(discharge)
+sd2 / sd1  # seems plausible
+
+# Pooled variance
+n1 <- length(intake)
+n2 <- length(discharge)
+var.pooled <- (n1-1)/(n1+n2-2)*var(intake) + (n2-1)/(n1+n2-2)*var(discharge)
+
+# Test statistic
+tobs <- (mean(intake) - mean(discharge)) / sqrt(var.pooled * (1/n1 + 1/n2))
+pval <- 2 * (1 - pt(tobs, n1 + n2 - 2))
+pval
 
 # Two-sample t-test assuming equal variances
 t.test(intake, discharge, 
