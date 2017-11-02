@@ -23,3 +23,17 @@ abline(slr)  # add regression line to previous plot
 
 # Print model summary
 summary(slr)
+
+# 95% confidence intervals for intercept and slope
+confint(slr, level = 0.95)
+
+# Install the investr package (requires an internet connection)
+# install.packages("investr")
+
+# Load the investr package
+library(investr)
+
+# Plot the fitted regression lines with (pointwise) confidence and prediction 
+# bands
+plotFit(slr, interval = "both", data = data.frame(vol = vol, time = time),
+        shade = TRUE)
