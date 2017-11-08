@@ -27,6 +27,15 @@ summary(slr)
 # 95% confidence intervals for intercept and slope
 confint(slr, level = 0.95)
 
+# Predicted value at vol = 50
+predict(slr, newdata = data.frame(vol = 50))
+
+# 95% confidence interval for the mean response
+predict(slr, newdata = data.frame(vol = 50), interval = "confidence")
+
+# 95% prediction interval for an individual response
+predict(slr, newdata = data.frame(vol = 50), interval = "prediction")
+
 # Install the investr package (requires an internet connection)
 # install.packages("investr")
 
@@ -37,3 +46,45 @@ library(investr)
 # bands
 plotFit(slr, interval = "both", data = data.frame(vol = vol, time = time),
         shade = TRUE)
+
+# Scatterplot of the residuals versus the fitted values
+fit <- fitted(slr)
+res <- residuals(slr)
+plot(fit, res, xlab = "Fitted value", ylab = "Residual")
+abline(h = 0, lty = 2, col = "red")
+
+# Scatterplot of the residuals versus VO2 max (vol)
+plot(vol, res, xlab = expression(VO[2]), ylab = "Residual")
+abline(h = 0, lty = 2, col = "red")
+
+# Scatterplot of the studentized residuals versus the fitted values
+stures <- rstandard(slr)
+plot(fit, stures, xlab = "Fitted value", ylab = "Studentized residual")
+abline(h = 0, lty = 2, col = "red")
+
+# Normal Q-Q plot of residulas
+qqnorm(res)
+qqline(res)  # adds a reference line
+
+# Residual plots
+par(mfrow = c(3, 2))
+plot(slr, which = 1:6)
+
+
+################################################################################
+# Simulated data displaying heteroscedasticity
+################################################################################
+
+# Simulate data
+set.seed(101)
+x <- runif(500, min = 0, max = 10)
+y <- 1 + 3 * x + rnorm(500, sd = x)
+plot(x, y)
+
+# Fit a SLR model
+fit <- lm(y ~ x)
+abline(fit, col = "red", lwd = 2)
+
+# Diagnostic plots
+par(mfrow = c(2, 2))
+plot(fit)
