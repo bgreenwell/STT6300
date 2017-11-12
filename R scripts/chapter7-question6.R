@@ -38,9 +38,17 @@ t.test(x = males,
        var.equal = TRUE, 
        conf.level = 0.95)
 
+# Assuming unequal variances
+t.test(x = males, 
+       y = females, 
+       alternative = "two.sided", 
+       var.equal = FALSE, 
+       conf.level = 0.95)
+
 # Obtain a 99% confidence interval
 t.test(x = males, 
        y = females, 
        alternative = "two.sided", 
        var.equal = TRUE, 
        conf.level = 0.99)
+
