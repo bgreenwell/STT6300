@@ -1,0 +1,92 @@
+---
+title: "Chapter 9: Analysis of Variance (ANOVA)"
+author: "Brandon M. Greenwell"
+date: "November 12, 2017"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# PCB lipid concentration data
+site <- c('ref', 'ref', 'ref', 'ref', 'ref', 'ref', 'ref', 'ref', 'ref', 'ref',
+          'ref', 'island', 'island', 'island', 'island', 'island', 'island',
+          'island', 'island', 'island', 'island', 'beach', 'beach', 'beach',
+          'beach', 'beach', 'beach', 'beach', 'beach', 'beach', 'beach', 
+          'beach')
+lipid <- c(325, 281, 412, 621, 424, 768, 904, 678, 908, 2234, 1819, 1315, 1315,
+           1212, 1999, 3108, 3011, 3804, 4450, 3779, 5301, 6564, 10460, 10650,
+           17230, 15540, 18920, 30970, 51960, 92130, 139190, 152100)
+```
+
+----
+
+Recall that the two-sample t-test is used to compare the means of two populations or two experimental groups. In many experiments there are more than two conditions or treatments to compare in which case the two sample *t*-test will not suffice. This chapter introduces *analysis of variance* (ANOVA) and the associated test of equality of more than two means.
+
+
+## Terminology
+
+**Example: ** An experiment is carried out to see how the amount of phosphorus and genotype affect plant growth. The biomass of the plant is the measured response. Three genotypes and two phosphorus levels (high and low) were used in the experiment. There were 10 plants grown at each experimental combination.
+
+- This is an example of a $2 \times 3$ factorial experiment.
+
+
+## Terminology
+
+- **Response variable:** The response (or dependent) variable in this example is the biomass of the plant.
+- **Factors:** The independent variables which *may* influence the response variable (genotype and phosphorus in this example).
+- **Levels:** The individual levels of each factor. For example, genotype has three levels and phosphorus has two.
+- **Treatment:** A combination of factor levels. In this example, there are six possible treatments:
+    - genotype 1 and low phosphorus;
+    - genotype 2 and low phosphorus;
+    - genotype 3 and low phosphorus;
+    - genotype 1 and high phosphorus;
+    - genotype 2 and high phosphorus;
+    - genotype 3 and high phosphorus.
+
+
+## Terminology
+
+- **Replicates:** The number of experimental units (plants in this example) per treatment. In this example, there are a total of ten replicates because there are ten plants grown at each treatment combination.
+
+- **Balanced design:** This occurs when each treatment combination uses the same number of replicates.
+
+
+## Example: PCB lipid concentration
+
+A study was done on the liver PCB concentration (\texttt{lipid}) in Black Guillemot birds in Canada at three different sites: a reference site (\texttt{ref}), a nearby island (\texttt{island}), and the beach \texttt{beach}. A boxplot of the PCB lipid concentration for the birds at the three sites shows strong positive skewness (i.e., right skewed data) which is quite common for data on concentrations of toxins. Because the data is strongly skewed, a log transformation was applied. The goal of the study is to compare the mean log-PCB lipid concentration in the birds at the three sites.
+
+Note that these data are observational, not experimental. That is, the data were collected by observing the birds at the three sites. In an experiment, the experimenter would assign units at random to the different treatments.
+
+
+## Example: PCB lipid concentration
+
+```{r}
+boxplot(lipid ~ site, xlab = "Site", ylab = "PCB lipid concentration")
+```
+
+
+## Example: PCB lipid concentration
+
+```{r}
+boxplot(log(lipid) ~ site, xlab = "Site", ylab = "log-PCB lipid concentration")
+```
+
+
+## Example: PCB lipid concentration
+
+Let $\mu_{beach}$, $\mu_{island}$, and $\mu_{ref}$ be the mean log-PCB lipid concentration of Black Guillemot birds at the three site. We are interested in testing
+
+$$
+H_0: \mu_{beach} = \mu_{island} = \mu_{ref}
+$$
+
+The alternative (or research) hypothesis is that the means are not all equal (but two of them could be).
+
+
+## Example: PCB lipid concentration
+
+Let $y_{ij}$ be the log-PCB concentration of the $j$-th bird at the $i$-th site. A simple linear model for these data has the form
+$$
+y_{ij} = \mu_i + \epsilon_{ij}, \quad \epsilon_{ij} \sim N\left(0, \sigma^2\right)
+$$
