@@ -513,4 +513,122 @@ The observed $t$-statistic is 2.5616 and the observed significance level (i.e., 
 
 \end{description}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chapter 7}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{description}
+
+% Question 1. ------------------------------------------------------------------
+\subsection*{Question 1.}
+  
+\begin{description}
+  
+  % a)
+  \item[a)] Yes, since $p_1 = 0.0076 < 0.01$ indicates strong statistical evidence against the null hypothesis (equality of average sperm concentration).
+    
+  % b)
+  \item[b)] Yes, since $p2 = 0.13 > 0.1$ indicates weak evidence against the null hypothesis (equality of average sperm mortality).
+    
+  % c)
+  \item[c)] Assuming equal variances, the degrees of freedom associated with the $t$-tests is $df = n_1 + n_2 = 32 + 43 - 2 = 73$.
+    
+\end{description}
+
+  
+% Question 2. ------------------------------------------------------------------
+\subsection*{Question 2.}
+
+\begin{description}
+  
+  % a)
+  \item[a)] Let $\mu_l$ and $\mu_p$ be the mean decrease in cholesterol level after taking lipitor and pravachol for a year, respectively. We are interested in testing 
+  \begin{equation*}
+    H_0: \mu_l -\mu_p = 0 \quad vs. \quad H_1: \mu_l - \mu_p > 0
+  \end{equation*}
+    
+  % b)
+  \item[b)] The pooled estimate of the variance is given by
+  \begin{equation*}
+    s_p^2 = \frac{\left(n_1 - 1\right)s_1^2 + \left(n_2 - 1\right)s_2^2}{n_1 + n_2 - 2} = 628.2557.
+  \end{equation*}
+  Hence, the pooled estimate of the stadard deviation is $s_p = \sqrt{628.2557} = 25.06503$.
+    
+  % c)
+  \item[c)] Assuming equal variances, the degrees of freedom associated with the $t$-tests is $df = n_1 + n_2 = 15 + 15 - 2 = 28$.
+
+  % d)
+  \item[d)] Since this is an upper one-sided test, the critical region is all values of the test statistic $t$ such that $t > t_{1 - \alpha, df} = 1.701131$.
+    
+  % e)
+  \item[e)] The value of the test statistic is
+  \begin{equation*}
+    t = \frac{\bar{x}_l - \bar{x}_p}{s_p\sqrt{1 / n_1 + 1 / n_2}} = 0.754.
+  \end{equation*}
+    
+  % f)
+  \item[f)] Since $t < 1.701131$, we fail to reject the null hypothesis at the 0.05 significance level and conclude that the average decrease in cholesterol level is the same for each drug after taking for a year.
+    
+\end{description}
+
+
+% Question 6. ------------------------------------------------------------------
+\subsection*{Question 6.}
+
+\begin{description}
+  
+  % a)
+  \item[a)] Let $\mu_m$ and $\mu_f$ be the average body temperatures for males and females, respectively. We are interested in testing
+  \begin{equation*}
+    H_0: \mu_m - \mu_f = 0 \quad vs. \quad H_1: \mu_m - \mu_f \ne 0
+  \end{equation*}
+    
+  % b)
+  \item[b)] Since this is a two-sided test, the rejection region consists of all values of the test statistic $t$ such that $|t| > t_{1-\alpha/2, df} = 1.978671$.
+    
+  % c)
+  \item[c)] The test statistic is $t = -2.285435$.
+
+  % d)
+  \item[d)] Running the R script, we can verify the result in part c).
+    
+  % e)
+  \item[e)] Yes, hence, we will reject the null hypothesis at the 0.05 significance level and conclude that the average body temperature between males and females is different.
+    
+  % f)
+  \item[f)] Same conclusion (just change \texttt{var.equal} to \texttt{FALSE} in the associated R code).
+
+  % g)
+  \item[g)] Running the associated R code, we obtain a 95\% confidence interval of $\left(-0.5396, -0.0388\right)$. Hence, we can be 95\% confident that the true difference $\mu_m - \mu_f$ lies in this interval. This interval also indicates that the average body temperature in males is statisticaly significantly less than that of females using a 0.05 significance level.
+
+  % h)
+  \item[h)] A 99\% confidence interval for the same difference is $\left(-0.6201, 0.0417\right)$. This interval is wider (since we want to be more confident) and contains zero, hence, we would fail to reject the null hypothesis at the 0.01 level of signficance and conclude that the average body tempertures are the same.
+  
+\end{description}
+
+
+% Question 10. -----------------------------------------------------------------
+\subsection*{Question 10.}
+  
+\begin{description}
+
+  % a)
+  \item[a)] Let $X$ and $Y$ be the before and after burn measurements, respectively. Further, let $D = Y - X$ be the difference and $\mu_D$ be the average difference. We are interested in testing
+  \begin{equation*}
+    H_0: \mu_D = 0 \quad vs. \quad H_1: \mu_D \ne 0
+  \end{equation*}
+  
+  % b)
+  \item[b)] Since the data are paired (i.e., before and after measurements), we should perform a paired $t$-test (or, equivalently, a one-samplt $t$-test on the paired differences).
+  
+  % c)
+  \item[c)] The sample mean of the paired differences is $\bar{x}_D = -40.58333$ (kg) and the sample standard deviation is $s_D = 15.79101$ (kg). Since the sample size is 12, the test statistic is $t = \bar{x}_D / \left(s_D / \sqrt{n}\right) = -8.902836$. The associated $p$-value is $2.331e-06 < 0.001$, hence, we have strong statistical evidence against the null hypothesis and can reasonably conclude that fire does change calcium level in the soil.
+  
+  % d)
+  \item[d)] R reports a 95\% confidence interval of $\left(-50.61646, -30.55020\right)$. Thus, we are 95\% confident that the average difference in calcium level in the soil after fire is between $-50.62$ and $-30.55$ kg.
+  
+\end{description}
+
+
 \end{document}
