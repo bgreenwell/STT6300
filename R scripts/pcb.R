@@ -38,3 +38,7 @@ pcb.aov <- aov(log(lipid) ~ site, data = pcb)
 summary(pcb.aov)
 par(mfrow = c(1, 2))
 plot(pcb.aov, which = 1:2)
+
+# As a linear model
+pcb.lm <- lm(log(lipid) ~ site, data = pcb)
+summary(pcb.lm)

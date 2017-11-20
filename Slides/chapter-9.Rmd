@@ -52,6 +52,18 @@ Recall that the two-sample t-test is used to compare the means of two population
 - **Balanced design:** This occurs when each treatment combination uses the same number of replicates.
 
 
+## Single factor ANOVA
+
+- An experiment with a single factor is called a single factor ANOVA or a one-way ANOVA.
+- The two-sample t-test was used to compare the means of two populations. 
+- In a one-way ANOVA, the classical statistical inference is to test if the means across the different levels of the factor are equal or not: 
+$$
+H_0: \mu_1 = \mu_2 = \dots \mu_k
+$$
+- Because we are typically dealing with factors with three or more levels, the
+two-sample $t$-test will not suffice. 
+
+
 ## Example: PCB lipid concentration
 
 A study was done on the liver PCB concentration (\texttt{lipid}) in Black Guillemot birds in Canada at three different sites: a reference site (\texttt{ref}), a nearby island (\texttt{island}), and the beach \texttt{beach}. A boxplot of the PCB lipid concentration for the birds at the three sites shows strong positive skewness (i.e., right skewed data) which is quite common for data on concentrations of toxins. Because the data is strongly skewed, a log transformation was applied. The goal of the study is to compare the mean log-PCB lipid concentration in the birds at the three sites.
@@ -86,7 +98,67 @@ The alternative (or research) hypothesis is that the means are not all equal (bu
 
 ## Example: PCB lipid concentration
 
-Let $y_{ij}$ be the log-PCB concentration of the $j$-th bird at the $i$-th site. A simple linear model for these data has the form
+- Let $y_{ij}$ be the log-PCB concentration of the $j$-th bird at the $i$-th site. A simple linear model for these data has the form
 $$
-y_{ij} = \mu_i + \epsilon_{ij}, \quad \epsilon_{ij} \sim N\left(0, \sigma^2\right)
+y_{ij} = \mu + \alpha_i + \epsilon_{ij}, \quad \epsilon_{ij} \sim N\left(0, \sigma^2\right)
 $$
+- Testing for equality of mean in the one-way ANOVA model is equivalent to testing the null hypothesis
+$$
+H_0: \alpha_1 = \alpha_2 = \dots \alpha_k = 0
+$$
+- The alternative hypothesis is that at least one of the $\alpha_j$'s is different from zero. 
+
+
+## $F$-test for the one-way ANOVA model
+
+To set up the one-way ANOVA hypothesis test procedure, we need to partition the overall variability in the response variable into two components: a component due to the variability **within** each factor level and the variability **between** the factor level means:
+$$
+SS\left(Total\right) = SS\left(Between\right) + SS\left(Within\right)
+$$
+
+-  Let $\bar{y}_{i\cdot}$ be the sample mean of the response at level $i$.
+- **Total sum of squares**: $SS\left(Total\right) = \sum_{i = 1} ^ k \sum_{j = 1} ^ {n_j} \left(y_{ij} - \bar{y}\right) ^ 2$.
+- **Between sum of squares**: $SS\left(Between\right) = n_i \sum_{i = 1} ^ k \left(y_{i\cdot} - \bar{y}\right) ^ 2$.
+- **Within sum of squares**: $SS\left(Within\right) = \sum_{i = 1} ^ k \sum_{j = 1} ^ {n_j} \left(y_{ij} - \bar{y}_{i\cdot}\right) ^ 2$.
+
+
+## $F$-test for the one-way ANOVA model
+
+- If the factor level means are all equal, then the within group variances and between group variances should be equal.
+- Hence, the $F$-test of the one-way ANOVA model is based on a comparison of these two variances:
+$$
+F = \frac{MS\left(Between\right)}{MS\left(Within\right)} = \frac{SS\left(Between\right) / \left(k - 1\right)}{SS\left(Within\right) / \left(n - k\right)}
+$$
+- Where $n = n_1 + n_2 + \dots + n_k$ is the total sample size.
+
+
+## F-test for the one-way ANOVA model
+
+- If the null hypothesis (i.e., equality of means) is true, then the $F$ statistic
+$$
+F = \frac{MS\left(Between\right)}{MS\left(Within\right)}
+$$
+has an $F$ distribution with $k - 1$ and $n - k$ degrees of freedom, denoted $F_{k - 1, n - k}$.
+
+- Correspondingly, we will reject the null hypothesis whenever $F$ is greater than $1 - \alpha$ percentile from an $F$ distribution with $k - 1$ and $n - k$ degrees of freedom.
+
+
+## Example: PCB lipid concentration
+
+To test the null hypothesis
+$$
+H_0: \mu_{beach} = \mu_{island} = \mu_{ref}
+$$
+in R, we could use the `aov` function:
+```{r}
+(pcb.aov <- aov(log(lipid) ~ site))
+```
+
+
+## Example: PCB lipid concentration
+
+Just like in regression, we can use the residuals to construct model diagnostic plots:
+```{r}
+par(mfrow = c(1, 2))
+plot(pcb.aov, which = 1:2)
+```
