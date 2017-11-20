@@ -26,9 +26,9 @@ Recall that the two-sample t-test is used to compare the means of two population
 
 ## Terminology
 
-**Example: ** An experiment is carried out to see how the amount of phosphorus and genotype affect plant growth. The biomass of the plant is the measured response. Three genotypes and two phosphorus levels (high and low) were used in the experiment. There were 10 plants grown at each experimental combination.
+**Example: ** An experiment is carried out to see how genotype and the amount of phosphorus affect plant growth. The biomass of the plant is the measured response. Three genotypes and two phosphorus levels (high and low) were used in the experiment. There were 10 plants grown at each experimental combination.
 
-- This is an example of a $2 \times 3$ factorial experiment.
+- This is an example of a $3 \times 2$ factorial experiment.
 
 
 ## Terminology
@@ -55,7 +55,7 @@ Recall that the two-sample t-test is used to compare the means of two population
 ## Single factor ANOVA
 
 - An experiment with a single factor is called a single factor ANOVA or a one-way ANOVA.
-- The two-sample t-test was used to compare the means of two populations. 
+- The two-sample t-test was used to compare the means of two populations (think og this as a one-way ANOVA with only two factor levels). 
 - In a one-way ANOVA, the classical statistical inference is to test if the means across the different levels of the factor are equal or not: 
 $$
 H_0: \mu_1 = \mu_2 = \dots \mu_k
