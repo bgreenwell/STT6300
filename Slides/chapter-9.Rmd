@@ -66,7 +66,7 @@ two-sample $t$-test will not suffice.
 
 ## Example: PCB lipid concentration
 
-A study was done on the liver PCB concentration (\texttt{lipid}) in Black Guillemot birds in Canada at three different sites: a reference site (\texttt{ref}), a nearby island (\texttt{island}), and the beach \texttt{beach}. A boxplot of the PCB lipid concentration for the birds at the three sites shows strong positive skewness (i.e., right skewed data) which is quite common for data on concentrations of toxins. Because the data is strongly skewed, a log transformation was applied. The goal of the study is to compare the mean log-PCB lipid concentration in the birds at the three sites.
+A study was done on the liver PCB concentration (\texttt{lipid}) in Black Guillemot birds in Canada at three different sites: a reference site (\texttt{ref}), a nearby island (\texttt{island}), and the beach (\texttt{beach}). A boxplot of the PCB lipid concentration for the birds at the three sites shows strong positive skewness (i.e., right skewed data) which is quite common for data on concentrations of toxins. Because the data is strongly skewed, a log transformation was applied. The goal of the study is to compare the mean log-PCB lipid concentration in the birds at the three sites.
 
 Note that these data are observational, not experimental. That is, the data were collected by observing the birds at the three sites. In an experiment, the experimenter would assign units at random to the different treatments.
 
@@ -96,17 +96,17 @@ $$
 The alternative (or research) hypothesis is that the means are not all equal (but two of them could be).
 
 
-## Example: PCB lipid concentration
+<!-- ## Example: PCB lipid concentration -->
 
-- Let $y_{ij}$ be the log-PCB concentration of the $j$-th bird at the $i$-th site. A simple linear model for these data has the form
-$$
-y_{ij} = \mu + \alpha_i + \epsilon_{ij}, \quad \epsilon_{ij} \sim N\left(0, \sigma^2\right)
-$$
-- Testing for equality of mean in the one-way ANOVA model is equivalent to testing the null hypothesis
-$$
-H_0: \alpha_1 = \alpha_2 = \dots \alpha_k = 0
-$$
-- The alternative hypothesis is that at least one of the $\alpha_j$'s is different from zero. 
+<!-- - Let $y_{ij}$ be the log-PCB concentration of the $j$-th bird at the $i$-th site. A simple linear model for these data has the form -->
+<!-- $$ -->
+<!-- y_{ij} = \mu + \alpha_i + \epsilon_{ij}, \quad \epsilon_{ij} \sim N\left(0, \sigma^2\right) -->
+<!-- $$ -->
+<!-- - Testing for equality of mean in the one-way ANOVA model is equivalent to testing the null hypothesis -->
+<!-- $$ -->
+<!-- H_0: \alpha_1 = \alpha_2 = \dots \alpha_k = 0 -->
+<!-- $$ -->
+<!-- - The alternative hypothesis is that at least one of the $\alpha_j$'s is different from zero.  -->
 
 
 ## $F$-test for the one-way ANOVA model
@@ -116,16 +116,22 @@ $$
 SS\left(Total\right) = SS\left(Between\right) + SS\left(Within\right)
 $$
 
--  Let $\bar{y}_{i\cdot}$ be the sample mean of the response at level $i$.
-- **Total sum of squares**: $SS\left(Total\right) = \sum_{i = 1} ^ k \sum_{j = 1} ^ {n_j} \left(y_{ij} - \bar{y}\right) ^ 2$.
-- **Between sum of squares**: $SS\left(Between\right) = n_i \sum_{i = 1} ^ k \left(y_{i\cdot} - \bar{y}\right) ^ 2$.
-- **Within sum of squares**: $SS\left(Within\right) = \sum_{i = 1} ^ k \sum_{j = 1} ^ {n_j} \left(y_{ij} - \bar{y}_{i\cdot}\right) ^ 2$.
+
+## $F$-test for the one-way ANOVA model
+
+Let $y_{ij}$ denote the $j$-th observation at level $i$ and $\bar{y}_{i\cdot}$ be the sample mean of the response at level $i$. Then, we define the following:
+
+- **Total sum of squares**: $SS\left(Total\right) = \sum_{i = 1} ^ k \sum_{j = 1} ^ {n_i} \left(y_{ij} - \bar{y}\right) ^ 2$.
+
+- **Between sum of squares**: $SS\left(Between\right) = \sum_{i = 1} ^ k n_i\left(\bar{y}_{i\cdot} - \bar{y}\right) ^ 2$.
+
+- **Within sum of squares**: $SS\left(Within\right) = \sum_{i = 1} ^ k \sum_{j = 1} ^ {n_i} \left(y_{ij} - \bar{y}_{i\cdot}\right) ^ 2$.
 
 
 ## $F$-test for the one-way ANOVA model
 
-- If the factor level means are all equal, then the within group variances and between group variances should be equal.
-- Hence, the $F$-test of the one-way ANOVA model is based on a comparison of these two variances:
+- If the factor level means are all equal, then the within group variance and between group variance should be equal.
+- The $F$-test of the one-way ANOVA model is based on a comparison of these two variances:
 $$
 F = \frac{MS\left(Between\right)}{MS\left(Within\right)} = \frac{SS\left(Between\right) / \left(k - 1\right)}{SS\left(Within\right) / \left(n - k\right)}
 $$
@@ -140,7 +146,9 @@ F = \frac{MS\left(Between\right)}{MS\left(Within\right)}
 $$
 has an $F$ distribution with $k - 1$ and $n - k$ degrees of freedom, denoted $F_{k - 1, n - k}$.
 
-- Correspondingly, we will reject the null hypothesis whenever $F$ is greater than $1 - \alpha$ percentile from an $F$ distribution with $k - 1$ and $n - k$ degrees of freedom.
+- Correspondingly, we will reject the null hypothesis whenever $F$ is greater than the $1 - \alpha$ percentile from an $F$ distribution with $k - 1$ and $n - k$ degrees of freedom.
+
+- The $p$-value for the test is given by the area to the right of $F$ under an $F_{k-1, n-k}$ distribution: $Pr\left\{F_{k-1, n-k} > F\right\}$.
 
 
 ## Example: PCB lipid concentration
