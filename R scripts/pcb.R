@@ -42,3 +42,19 @@ plot(pcb.aov, which = 1:2)
 # As a linear model
 pcb.lm <- lm(log(lipid) ~ site, data = pcb)
 summary(pcb.lm)
+
+# Multiple comparisons using the Bonferronit adjustment
+beach <- log(pcb[pcb$site == "beach", ]$lipid)
+island <- log(pcb[pcb$site == "island", ]$lipid)
+ref <- log(pcb[pcb$site == "ref", ]$lipid)
+t.test(island, beach, var.equal = TRUE, conf.level = 1 - (0.05 / 6))$conf.int
+t.test(ref, beach, var.equal = TRUE, conf.level = 1 - (0.05 / 6))$conf.int
+t.test(ref, island, var.equal = TRUE, conf.level = 1 - (0.05 / 6))$conf.int
+
+# Multiple comparisons using Tukey's HSD procedure
+pcb.hsd <- TukeyHSD(pcb.aov)
+print(pcb.hsd)
+plot(pcb.hsd)
+
+# Kruskal-Wallis test
+kruskal.test(log(lipid) ~ site, data = pcb)
