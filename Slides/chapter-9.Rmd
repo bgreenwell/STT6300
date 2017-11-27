@@ -248,7 +248,7 @@ Recall the following principals regarding power and sample size:
 
 - One common effects size to use is to specify the smallest difference $\delta$ that we would like to detect between the two most different means and let
 \begin{equation*}
-  \phi = \sqrt{\frac{n\delta^2}{nk\sigma^2}}
+  \phi = \sqrt{\frac{n\delta^2}{2k\sigma^2}}
 \end{equation*}
 
 
