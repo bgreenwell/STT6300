@@ -263,4 +263,64 @@ Recall the following principals regarding power and sample size:
 - In R, the function `kruskal.tes`t performs a Kruskal-Wallis rank sum test of the null that the location parameters of the distribution of $y$ are the same in each group (sample). The alternative is that they differ in at least one.
 
 
+## Two-way ANOVA
 
+- The one-way ANOVA is a GLM with a single categorical predictor (i.e., factor).
+- In practice, many experiments contain more than one factor.
+- It is usually more efficient to run a single experiment with multiple factors than it is to run individual experiments for each factor alone.
+- By running an experiment with all factors at once gives us the possibility to study **interaction effects**.
+
+
+## Two-way ANOVA: heart weight example
+
+A study was conducted where the weights of hearts of patients with (previously) normal mitral valves prior to infective endocarditis (i.e., an infection of the endocardial surface of the heart) were measured. The patients were classified based on race (black and white) and on sex (male and female). Thus, this is a two-factor study with race as one factor and sex as the other factor. In other words, this is a $2 \times 2$ factorial experiment. The response variable $y$ is heart weight.
+
+
+## Two-way ANOVA: heart weight example
+
+We can model the data from this type of experiment using a linear model:
+$$
+y_{ijk} = \mu + \alpha_i + \beta_j + \gamma_{ij} + \epsilon_{ijk},
+$$
+where
+
+- $y_{ijk}$ is the response for the $k$-th subject at the $i$-th level of the first factor (race) and the $j$-th level for the second factor (sex).
+
+- $\mu$ is the overall mean heart weight for the entire population.
+
+- $\alpha_i$ represents the effect for the $i$-th level of the first factor (race); hence, $\alpha_1$ represents the mean effect for blacks and $\alpha_2$ represents the mean effect for whites.
+
+- $\beta_j$ represents the effect for the $j$-th level of the second factor (sex).
+
+- $\gamma_{ij}$ represents the interaction effect between the two factors race and sex.
+
+- $\epsilon_{ijk}$ represents random error.
+
+
+## Two-way ANOVA: heart weight example
+
+In order to estimate $\alpha_i$, $\beta_j$, and $\gamma_{ij}$, we need to place some constraints on them. The standard convention is
+$$
+\sum_{i = 1}^r \alpha_i = \sum_{j = 1}^c \beta_j = 0,
+$$
+$$
+\sum_{i = 1} \gamma_{ij} = 0, \quad \forall j,
+$$
+and
+$$
+\sum_{j = 1} \gamma_{ij} = 0, \quad \forall i
+$$
+
+
+## Two-way ANOVA: heart weight example
+
+The analysis of two-factor experiments is typically carried out using $F$-tests (similar to the one-way ANOVA). A standard approach two two-way ANOVAs is as follows:
+
+- **Step 0:** (Optional) Perform an overall $F$-test of the null hypothesis that all three parameters in the model are zero (i.e., no differences in the mean response among all the treatments).
+
+- **Step 1:** Perform an $F$-test for the interaction term. If we reject, then we would skip steps 2 and 3 and proceed to use a multiple comparison procedure.
+    
+- **Step 2:** Perform an $F$-test for the first factor. If we reject the null hypothesis, then we conclude that the mean response differs across the different levels of this factor.
+    
+- **Step 3:** Perform an $F$-test for the second factor. If we reject the null hypothesis, then we conclude that the mean response differs across the different levels of this factor.
+    
